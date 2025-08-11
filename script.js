@@ -121,3 +121,9 @@ function submitAnswer(){
   renderHUD();
   setTimeout(newRound, 800);
 }
+function updateProgressAnimated(){
+  const fill = document.getElementById('progressFill');
+  const pct = Math.min(100, (state.xp % 100)); // მაგალითად 100 XP=level up
+  fill.style.width = pct + '%';
+  // xp pop უკვე იქმნება showCorrectAnimation()-მდე
+}
