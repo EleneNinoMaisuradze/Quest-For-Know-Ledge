@@ -160,3 +160,42 @@ function sceneTransition(fromEl, toEl, cb){
     if(cb) cb();
   }, 350);
 }
+function bossHit(damage){
+  const bossFill = document.getElementById('bossHpFill');
+  const prevWidth = parseFloat(bossFill.style.width) || 100;
+  const newWidth = Math.max(0, prevWidth - damage);
+  // small flash
+  bossFill.style.transition = 'width .6s ease';
+  bossFill.style.width = newWidth + '%';
+  bossFill.style.boxShadow = '0 0 12px rgba(255,255,255,.15) inset';
+  setTimeout(()=> bossFill.style.boxShadow = '', 700);
+  if(newWidth === 0){
+    // boss died -> confetti + dialogue
+    makeConfetti(window.innerWidth/2, 36);
+    showDialogue("ბოსი დამარცხდა! ჯილდო: 100 XP");
+    state.xp += 100;
+    renderHUD();
+  }
+}
+function showDialogue(text, speed=28){
+  const box = document.getElementById('dialogue');
+  const el = document.getElementById('dialogueText');
+  box.classList.remove('hidden');
+  el.textContent = '';
+  let i = 0;
+  const t = setInterval(()=>{
+    el.textContent += text[i++] || '';
+    if(i >= text.length){ clearInterval(t); setTimeout(()=> box.classList.add('hidden'), 2500); }
+  }, speed);
+}
+// avatar selection
+document.querySelectorAll('.avatar').forEach(node=>{
+  node.addEventListener('click', ()=>{
+    document.querySelectorAll('.avatar').forEach(n=>n.classList.remove('selected'));
+    node.classList.add('selected');
+    // პატარა bounce
+    node.animate([{ transform:'translateY(-6px)' },{ transform:'translateY(0)' }], { duration:260, easing:'ease-out' });
+    // apply bonuses
+    // state.avatar = node.dataset.id;
+  });
+});
