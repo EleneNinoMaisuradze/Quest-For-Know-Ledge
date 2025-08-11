@@ -99,3 +99,25 @@ function showWrongAnimation(){
   // small comic feedback to log
   log('ჰეიბი! არასწორია — სცადე სხვანაირად (ხვალ კიდე).');
 }
+// მაგ მაგალითისთვის assume: state.currentQ.answer არის expected
+function submitAnswer(){
+  clearTimer(); // თუ გაქვს ტაიმერი
+  const raw = document.getElementById('answerInput').value.trim();
+  const ok = checkCorrect(raw, state.currentQ.answer); // existing compare function
+  if(ok){
+    // მაღალი სტაფი — დაანახო ანიმაცია
+    showCorrectAnimation(document.getElementById('questionBox').getBoundingClientRect().left + 80);
+    state.xp += 15;
+    state.coins += 8;
+    log('სწორია — +15 XP');
+    updateProgressAnimated();
+  } else {
+    showWrongAnimation();
+    state.xp += 3;
+    log(`შეცდომა — სწორია: ${state.currentQ.answer}`);
+  }
+  // store history და ა.შ.
+  state.round++;
+  renderHUD();
+  setTimeout(newRound, 800);
+}
