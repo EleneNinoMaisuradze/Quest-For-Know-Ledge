@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="ka">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Math Mountains – აბიტურიენტებისთვის</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
-<!-- index.html: body-ს შიგთავსი -->
 <body>
   <div id="game-container" class="scene-container">
     <header>
@@ -16,12 +15,22 @@
         <div id="coinsBox">Coins: <span id="coins">0</span></div>
         <div id="timerWrap">
           <svg id="timerSvg" width="56" height="56" viewBox="0 0 36 36">
-            <path id="timerBg" d="M18 2.0845
-              a 15.9155 15.9155 0 0 1 0 31.831
-              a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e6eef0" stroke-width="2.5"/>
-            <path id="timerProgress" d="M18 2.0845
-              a 15.9155 15.9155 0 0 1 0 31.831
-              a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#0b6b5a" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100"/>
+            <path
+              id="timerBg"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              fill="none"
+              stroke="#e6eef0"
+              stroke-width="2.5"
+            />
+            <path
+              id="timerProgress"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              fill="none"
+              stroke="#0b6b5a"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-dasharray="0 100"
+            />
           </svg>
         </div>
       </div>
@@ -37,10 +46,26 @@
           </div>
         </div>
 
+        <!-- ====== აქ დავამატე ინსტრუქციები ====== -->
+        <section id="instructions" style="max-width: 600px; margin: 20px auto; color: #fff;">
+          <h2>ინსტრუქციები</h2>
+          <p>
+            აირჩიეთ სწორი პასუხი კითხვაზე ქვემოთ მოცემული ვარიანტებიდან. შემდეგ დააჭირეთ ღილაკს
+            <strong>„შემოწმება“</strong>.
+          </p>
+          <p>
+            თუ პასუხი სწორია, მიიღებთ XP და გადაივლით შემდეგ კითხვაზე. თუ არასწორია, მიიღებთ მინიშნებას.
+          </p>
+          <p>
+            ყველა კითხვაზე სწორი პასუხის შემთხვევაში, მოგილოცავთ წარმატებით დასრულებას!
+          </p>
+        </section>
+        <!-- ================================ -->
+
         <div class="center-column">
           <div class="question-box" id="questionBox">
             <div id="question">მზადებაა კითხვები...</div>
-            <input id="answerInput" class="answer" />
+            <input id="answerInput" class="answer" autocomplete="off" />
             <button id="checkBtn" class="btn">შემოწმება</button>
           </div>
 
@@ -70,3 +95,4 @@
 
   <script src="script.js"></script>
 </body>
+</html>
