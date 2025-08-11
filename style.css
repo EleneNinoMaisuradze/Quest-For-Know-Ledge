@@ -1,0 +1,13 @@
+body {
+    background: linear-gradient(to top, #cce0ff, #ffffff);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#game-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
