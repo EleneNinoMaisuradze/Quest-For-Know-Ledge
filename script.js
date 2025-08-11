@@ -127,3 +127,36 @@ function updateProgressAnimated(){
   fill.style.width = pct + '%';
   // xp pop უკვე იქმნება showCorrectAnimation()-მდე
 }
+// timer circle helpers
+function setTimerProgress(percent){
+  const path = document.getElementById('timerProgress');
+  // stroke-dasharray: length proportional. We'll use 100 as full
+  path.setAttribute('stroke-dasharray', `${percent} 100`);
+}
+
+let timerInterval = null;
+function startTimerSeconds(totalSeconds, onExpire){
+  clearInterval(timerInterval);
+  let left = totalSeconds;
+  setTimerProgress(100);
+  timerInterval = setInterval(()=>{
+    left--;
+    const pct = Math.max(0, Math.round((left/totalSeconds)*100));
+    setTimerProgress(pct);
+    if(left <= 0){
+      clearInterval(timerInterval);
+      if(typeof onExpire === 'function') onExpire();
+    }
+  }, 1000);
+}
+function sceneTransition(fromEl, toEl, cb){
+  fromEl.classList.add('scene-exit');
+  setTimeout(()=>{
+    fromEl.classList.add('hidden');
+    fromEl.classList.remove('scene-exit');
+    toEl.classList.remove('hidden');
+    toEl.classList.add('scene-enter');
+    setTimeout(()=> toEl.classList.remove('scene-enter'), 500);
+    if(cb) cb();
+  }, 350);
+}
